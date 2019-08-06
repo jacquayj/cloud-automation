@@ -20,6 +20,7 @@ current_namespace=$(gen3 db namespace)
 scriptDir="${GEN3_HOME}/kube/services/revproxy"
 declare -a confFileList=()
 confFileList+=("--from-file" "$scriptDir/gen3.nginx.conf/README.md")
+confFileList+=("--from-file" "$scriptDir/gen3.nginx.conf/immport-service.conf")
 for name in $(g3kubectl get services -o json | jq -r '.items[] | .metadata.name'); do
   filePath="$scriptDir/gen3.nginx.conf/${name}.conf"
   #echo "$filePath"
@@ -42,9 +43,6 @@ then
       fi
     done
   fi
-  filePath="$scriptDir/gen3.nginx.conf/immport-service.conf"
-  confFileList+=("--from-file" "$filePath")
-
 fi
 
 #echo "${confFileList[@]}" $BASHPID
