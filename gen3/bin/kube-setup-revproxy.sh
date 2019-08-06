@@ -42,6 +42,9 @@ then
       fi
     done
   fi
+  filePath="$scriptDir/gen3.nginx.conf/immport-service.conf"
+  confFileList+=("--from-file" "$filePath")
+
 fi
 
 #echo "${confFileList[@]}" $BASHPID
